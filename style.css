@@ -3,38 +3,142 @@
 }
 
 /* Apply border-box to ALL elements, not just html */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
+.preload * {
+    /* block transitions while loading the page (with js) */
+    transition: none !important;
+    /* overrides id, etc point superiorty */
+}
 
-.preload * {  /* block transitions while loading the page (with js) */
-    transition: none !important; /* overrides id, etc point superiorty */
+body {
+    min-height: 100vh;
+    /* Fill the screen height */
+    margin: 0;
+    /* Remove the default 8px border */
+
+    display: flex;
+    justify-content: center;
+    perspective: 30cm;
+    /* perspective for 3D transforms, without a camera not even "line-wide px" will show up */
+}
+
+#nav-cocas {
+    height: 50px;
+    width: 50px;
+    margin: 5px;
+    cursor: pointer;
+
+    position: fixed;
+    top: 2vh;
+    left: 48%;
+    right: 52%;
+    z-index: 2;
+
+    /* animation:  */
 }
 
 #paper-cocas {
-    height: 70vmin; /* viewport relative units to get minimum edge */
-    width: 70vmin;
-    margin: auto;
+    height: 70vmin;
+    /* viewport relative units to get minimum edge */
+    aspect-ratio: 1 / 1;
+    /* keep square shape */
+    margin: 5px;
     border: 1px solid rgb(255, 0, 0);
+    pointer-events: None;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
 
     position: relative;
-    top: 10vh;
-    perspective: 1000px;
-    
+    top: 15vh;
+
     transform-style: preserve-3d;
-    transform: rotateX(10deg) rotateY(-10deg);
+    transform: rotateX(70deg) rotateZ(105deg);
 
 }
 
-.inner-flap {
+/* Add this class to #paper-cocas to inspect it */
+.debug-spin {
+    animation: spin-view 100s infinite linear;
+}
+
+@keyframes spin-view {
+    0% {
+        transform: rotateX(60deg) rotateZ(0deg) translateZ(0px);
+    }
+
+    50% {
+        transform: rotateX(0deg) rotateZ(180deg) translateZ(200px);
+    }
+
+    /* Zooms in mid-spin */
+    100% {
+        transform: rotateX(60deg) rotateZ(360deg) translateZ(0px);
+    }
+}
+
+.quadrant {
     height: 100%;
-    width: 100%;    
-    opacity: 1.0;
+    width: 100%;
+
+
+    position: relative;
+    transform-style: preserve-3d;
+    /* allow children to exist in 3D space, not photographed 2D */
+    transition: transform 0.6s ease-out;
+    /* centre of the uncut square that makes flaps */
+
+}
+
+#q1-quadrant {
+    /* visibility: hidden; */
+
+    transform-origin: 0% 100%;
+    transform: rotate3d(1, 1, 0, -39deg);
+}
+
+#q2-quadrant {
+    /* visibility: hidden; */
+
+    transform-origin: 100% 100%;
+    transform: rotate3d(1, -1, 0, -39deg);
+}
+
+#q3-quadrant {
+    /* visibility: hidden; */
+
+    transform-origin: 100% 0%;
+    transform: rotate3d(1, 1, 0, 39deg);
+}
+
+#q4-quadrant {
+    /* visibility: hidden; */
+
+    transform-origin: 0% 0%;
+    transform: rotate3d(-1, 1, 0, -39deg);
+}
+
+.flap {
+    height: 100%;
+    width: 100%;
+    opacity: 95%;
+    pointer-events: auto;
 
     position: absolute;
     transition: transform 0.6s ease-out;
+
+    /* transform-origin: 50% 50%; */
 }
+
+/* .inner-flap {
+    visibility: hidden;
+} */
 .flap-link {
     height: 100%;
     width: 100%;
@@ -47,133 +151,209 @@
     font-family: Helvetica;
     font-size: 16px;
     color: black;
-    text-decoration: none; /* remove underline */
-
+    text-decoration: none;
+    /* remove underline */
     position: absolute;
-
+    visibility: hidden;
 }
+
 
 .inner-flap:hover {
     /* transform: translateX(2%) translateY(2%) translateZ(10px); */
     opacity: 0.5;
 
+    transform-origin: 50% 50%;
     transition: opacity 0.1s ease-out;
 }
 
+#q1-outer {
+    background-color: hsl(from var(--flap-color) 80 10% 47%);
 
+
+    /* origin at the middle right of the flap */
+    /* transform-origin: 100% 50%; */
+    transform: rotate3d(1, -1, 0, -17.5deg);
+}
+
+#q1-outer>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    /* maintain aspect ratio */
+
+    opacity: 80%;
+
+    transform-origin: 100% 50%;
+    transform: rotate3d(0, 1, 0, 30deg);
+}
+
+
+#q2-outer {
+    background-color: hsl(from var(--flap-color) 80 10% 47%);
+    visibility: hidden;
+
+    /* transform: rotateX(-45deg) rotateY(-45deg); */
+}
+
+#q3-outer {
+    background-color: hsl(from var(--flap-color) 80 40% 47%);
+    visibility: hidden;
+
+    /* transform: rotateX(45deg) rotateY(-45deg); */
+}
+
+#q4-outer {
+    background-color: hsl(from var(--flap-color) 80 70% 47%);
+    visibility: hidden;
+    /* transform: rotateX(45deg) rotateY(45deg); */
+}
+
+#past-flap {
+    padding-top: 25%;
+    padding-left: 10%;
+    clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
+
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    background-color: hsl(from var(--flap-color) 60 100% 47%);
+    visibility: visible;
+
+    transform: rotate3d(1, -1, 0, -17.5deg);
+}
+
+/* the 1% and 99% prevent buggy overlapse while moving */
 #language-flap {
-    padding-top: 10%;
-    padding-left: 25%;
-    clip-path: polygon(0% 0%, 50% 0%, 50% 50%);
-    
+    /* padding-top: 10%;
+    padding-left: 25%; */
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+
     align-items: flex-start;
     justify-content: flex-start;
 
     background-color: hsl(from var(--flap-color) 0 60% 47%);
+    visibility: hidden;
 
-    transform: rotateX(-45deg) rotateY(90deg);
+    transform: rotate3d(1, -1, 0, 17.5deg);
+    transition: transform 0.6s ease-out;
 }
-#future-flap {
-    padding-top: 25%;
-    padding-right: 10%;
-    clip-path: polygon(100% 0%, 100% 50%, 50% 50%);
 
-    justify-content: flex-end;
-    align-items: flex-start;
-
-    background-color: hsl(from var(--flap-color) 20 100% 47%);
-
-    transform: rotateX(-90deg) rotateZ(-45deg);
-}
-#now-flap {
-    padding-bottom: 25%;
-    padding-right: 10%;
-    clip-path: polygon(100% 50%, 100% 100%, 50% 50%);
-
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    background-color: hsl(from var(--flap-color) 60 100% 47%);
-
-    transform: rotateX(90deg) rotateZ(45deg);
-}
-#past-flap {
-    padding-top: 25%;
-    padding-left: 10%;
-    clip-path: polygon(0% 0%, 0% 50%, 50% 50%);
-
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    background-color: hsl(from var(--flap-color) 60 100% 47%);
-
-    transform: rotateX(-90deg) rotateZ(45deg);
-}
-#health-flap {
-    padding-bottom: 25%;
-    padding-left: 10%;
-    clip-path: polygon(0% 50%, 0% 100%, 50% 50%);
-
-    justify-content: flex-start;
-    align-items: flex-end;
-
-    background-color: hsl(from var(--flap-color) 30 100% 47%);
-
-    transform: rotateX(90deg) rotateZ(-45deg);
-}
 #taste-flap {
-    padding-top: 10%;
-    padding-right: 25%;
-    clip-path: polygon(50% 0%, 100% 0%, 50% 50%);
+    /* padding-top: 10%;
+    padding-right: 25%; */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
 
     justify-content: flex-end;
     align-items: flex-start;
 
     background-color: hsl(from var(--flap-color) 80 100% 47%);
 
-    transform: rotateX(-45deg) rotateY(-90deg);
+    transform: rotate3d(1, 1, 0, 16deg);
+
 }
+
+#health-flap {
+    /* padding-bottom: 25%;
+    padding-left: 10%; */
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    background-color: hsl(from var(--flap-color) 30 100% 47%);
+
+    transform: rotate3d(1, 1, 0, -16deg);
+}
+
+#future-flap {
+    /* padding-top: 25%;
+    padding-right: 10%; */
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    background-color: hsl(from var(--flap-color) 20 100% 47%);
+
+    transform: rotate3d(1, -1, 0, 16deg);
+}
+
+
 #profile-flap {
-    padding-bottom: 10%;
-    padding-left: 25%;
-    clip-path: polygon(0% 100%, 50% 100%, 50% 50%);
+    /* padding-bottom: 10%;
+    padding-left: 25%; */
+    clip-path: polygon(100% 0%, 0% 100%, 100% 100%);
 
     justify-content: flex-start;
     align-items: flex-end;
 
     background-color: hsl(from var(--flap-color) 70 100% 47%);
 
-    transform: rotateX(45deg) rotateY(90deg);
+    transform: rotate3d(1, -1, 0, -16deg);
 }
+
+#now-flap {
+    /* padding-bottom: 25%;
+    padding-right: 10%; */
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%);
+
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    background-color: hsl(from var(--flap-color) 40 80% 47%);
+
+    transform: rotate3d(-1, -1, 0, 16deg);
+}
+
+
 #contact-flap {
-    padding-bottom: 10%;
-    padding-right: 25%;
-    clip-path: polygon(50% 100%, 100% 100%, 50% 50%);
+    /* padding-bottom: 10%;
+    padding-right: 25%; */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
 
     justify-content: flex-end;
     align-items: flex-end;
 
     background-color: hsl(from var(--flap-color) 50 100% 47%);
 
-    transform: rotateX(45deg) rotateY(-90deg);
+    transform: rotate3d(-1, -1, 0, -16deg);
 }
 
-#taste-flap, #language-flap {
-    --open-flap: rotateX(0deg);
-    --closed-flap: rotateX(-45deg);
+/*
+#language-flap {
+    --open-flap: rotateX(-65deg) rotateY(35deg);
+    --closed-flap: rotateX(-25deg) rotateY(89deg);
 }
-#now-flap, #future-flap {
-    --open-flap: rotateY(0deg);
-    --closed-flap: rotateY(-45deg);
+#taste-flap {
+    --open-flap: rotateX(-65deg) rotateY(-35deg);
+    --closed-flap: rotateX(-25deg) rotateY(-89deg);
 }
-#past-flap, #health-flap {
-    --open-flap: rotateY(0deg);
-    --closed-flap: rotateY(45deg);
+#profile-flap {
+    --open-flap: rotateX(65deg) rotateY(35deg);
+    --closed-flap: rotateX(25deg) rotateY(89deg);
 }
-#profile-flap, #contact-flap {
-    --open-flap: rotateY(0deg);
-    --closed-flap: rotateY(-45deg);
+#contact-flap {
+    --open-flap: rotateX(65deg) rotateY(-35deg);
+    --closed-flap: rotateX(25deg) rotateY(-89deg);
 }
+#future-flap {
+    --open-flap: rotateY(-65deg) rotateX(-35deg);
+    --closed-flap: rotateY(-25deg) rotateX(-89deg);
+}
+#now-flap{
+    --open-flap: rotateY(-65deg) rotateX(35deg);
+    --closed-flap: rotateY(-25deg) rotateX(89deg);
+}
+#past-flap {
+    --open-flap: rotateY(65deg) rotateX(-35deg);
+    --closed-flap: rotateY(25deg) rotateX(-89deg);
+}
+#health-flap {
+    --open-flap: rotateY(65deg) rotateX(35deg);
+    --closed-flap: rotateY(25deg) rotateX(89deg);
+}
+
+
 
 @keyframes open-flap {
     0% {transform: var(--closed-flap); }
@@ -187,21 +367,23 @@
     66% {transform: var(--open-flap); }
     100% {transform: var(--closed-flap) }
 }
-
+*/
 /* A: Cocas is opened vertically */
 /* 1. open vertical flaps */
+
 .open-cocas-vertical #taste-flap,
 .open-cocas-vertical #language-flap,
 .open-cocas-vertical #profile-flap,
 .open-cocas-vertical #contact-flap {
-    animation: open-flap 3s ease-in-out forwards; /* forwards keeps the last state */
+    /* animation: open-flap 3s ease-in-out forwards; forwards keeps the last state */
 }
+
 /* 2. close horizontal flaps */
 .open-cocas-vertical #past-flap,
 .open-cocas-vertical #health-flap,
 .open-cocas-vertical #now-flap,
 .open-cocas-vertical #future-flap {
-    animation: close-flap 3s ease-in-out forwards;
+    /* animation: close-flap 3s ease-in-out forwards; */
 }
 
 /* B: Cocas is opened horizontally */
@@ -210,12 +392,15 @@
 .open-cocas-horizontal #language-flap,
 .open-cocas-horizontal #profile-flap,
 .open-cocas-horizontal #contact-flap {
-    animation: close-flap 3s ease-in-out forwards;
+    /* animation: close-flap 3s ease-in-out forwards; */
 }
+
 /* 2. open vertical flaps */
 .open-cocas-horizontal #past-flap,
 .open-cocas-horizontal #health-flap,
 .open-cocas-horizontal #now-flap,
 .open-cocas-horizontal #future-flap {
-    animation: open-flap 3s ease-in-out forwards;
+    /* animation: open-flap 3s ease-in-out forwards; */
+    /* do nothing */
+
 }
