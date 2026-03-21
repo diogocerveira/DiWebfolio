@@ -3,65 +3,82 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> <!-- block zoom in phone-->
     <link rel="stylesheet" href="style.css">
     <title>DI</title>
+    <script src="script.js" defer></script>
+    <!-- defer makes the browser execute the script after parsing the doc (but before DOMContentLoaded) -->
 </head>
 
 <body class="preload">
-    <img id="nav-cocas" src="assets/cocas-icon.png" alt="Navigation Cocas"></div>
-    <div id="paper-cocas" class="debug-spin">
+    <img id="nav-cocas" src="assets/cocas-icon.png" alt="Navigation Cocas"></img>
+    <div id="paper-cocas">
         <!-- <input> -->
         <!-- <img id="paper-cocas-gif" src=""> -->
 
-        <div class="quadrant" id="q2-quadrant">
-            <div class="flap inner-flap" id="taste-flap">
+        <div class="quadrant" id="q2">
+            <div class="flap inner taste">
                 <a href="flaps/taste.html" class="flap-link">Taste</a>
             </div>
-            <div class="flap inner-flap" id="health-flap">
+            <div class="flap outer taste"> <!-- wrapper w/0 clip-path needed for 3d rotation of children-->
+                <div class="texture"></div>
+            </div>
+            <div class="flap inner health">
                 <a href="flaps/health.html" class="flap-link">Health</a>
             </div>
-            <div class="flap outer-flap" id="q2-outer">
-                <img src="assets/di-logo.png" alt="DI Logo" id="di-logo">
+            <div class="flap outer health">
+                <div class="texture"></div>
             </div>
         </div>
-        <div class="quadrant" id="q1-quadrant">
-            <div class="flap inner-flap" id="past-flap">
+
+        <div class="quadrant" id="q1">
+            <div class="flap inner past">
                 <a href="flaps/past.html" class="flap-link">Past</a>
             </div>
-            <div class="flap inner-flap" id="language-flap">
+            <div class="flap outer past">
+                <div class="texture"></div>
+            </div>
+            <div class="flap inner language">
                 <a href="flaps/language.html" class="flap-link">Language</a>
             </div>
-            <div class="flap outer-flap" id="q1-outer">
-                <img src="assets/di-logo.png" alt="DI Logo">
-            </div>
 
+            <div class="flap outer language">
+                <div class="texture"></div>
+            </div>
         </div>
-        <div class="quadrant" id="q3-quadrant">
-            <div class="flap inner-flap" id="future-flap">
+
+        <div class="quadrant" id="q3">
+            <div class="flap inner future">
                 <a href="flaps/future.html" class="flap-link">Future</a>
             </div>
-            <div class="flap inner-flap" id="profile-flap">
+            <div class="flap outer future">
+                <div class="texture"></div>
+            </div>
+            <div class="flap inner profile">
                 <a href="flaps/profile.html" class="flap-link">Profile</a>
             </div>
-            <div class="flap outer-flap" id="q3-outer">
-                <img src="assets/di-logo.png" alt="DI Logo" id="di-logo">
+            <div class="flap outer profile">
+                <div class="texture"></div>
             </div>
         </div>
-        <div class="quadrant" id="q4-quadrant">
-            <div class="flap inner-flap" id="now-flap">
+
+        <div class="quadrant" id="q4">
+            <div class="flap inner now">
                 <a href="flaps/now.html" class="flap-link">Now</a>
             </div>
-            <div class="flap inner-flap" id="contact-flap">
+            <div class="flap outer now">
+                <div class="texture"></div>
+            </div>
+            <div class="flap inner contact">
                 <a href="flaps/contact.html" class="flap-link">Contact</a>
             </div>
-            <div class="flap outer-flap" id="q4-outer">
-                <img src="assets/di-logo.png" alt="DI Logo" id="di-logo">
+
+            <div class="flap outer contact">
+                <div class="texture"></div>
             </div>
         </div>
 
     </div>
-
-    <script src="script.js"></script> <!-- at the end because it uses what is defined before (?) -->
 </body>
 
 </html>
