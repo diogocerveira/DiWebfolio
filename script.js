@@ -7,7 +7,7 @@ function toggleCocasState() {
     if (cocas.classList.contains("roll3-h2v") || cocas.classList.contains("roll3-c2v")) { // cocas open vertical sequence -> horizontal
         cocas.classList.remove("roll3-h2v");
         cocas.classList.remove("roll3-c2v");
-        
+
         cocas.classList.add("roll3-v2h");    // start roll
         console.log("Cocas State: Opening Horizontally");
 
@@ -55,7 +55,7 @@ if (cocas) {
     });
 }
 if (nav) {
-    nav.addEventListener("click", () => toggleDebug());
+    // nav.addEventListener("click", () => toggleDebug());
 }
 
 window.addEventListener("load", () => { /* on page load */
