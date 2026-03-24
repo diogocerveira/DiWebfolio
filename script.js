@@ -2,6 +2,24 @@ const body = document.body;
 const cocas = document.getElementById("paper-cocas");
 const nav = document.getElementById("nav-cocas");
 
+const pastPage = document.getElementById("page-past");
+const languagePage = document.getElementById("page-language");
+const tastePage = document.getElementById("page-taste");
+const healthPage = document.getElementById("page-health");
+const futurePage = document.getElementById("page-future");
+const profilePage = document.getElementById("page-profile");
+const nowPage = document.getElementById("page-now");
+const contactPage = document.getElementById("page-contact");
+
+const pastLink = document.getElementById("past");
+const languageLink = document.getElementById("language");
+const tasteLink = document.getElementById("taste");
+const healthLink = document.getElementById("health");
+const futureLink = document.getElementById("future");
+const profileLink = document.getElementById("profile");
+const nowLink = document.getElementById("now");
+const contactLink = document.getElementById("contact");
+
 function toggleCocasState() {
     // switch between closed and two types of open
     if (cocas.classList.contains("roll3-h2v") || cocas.classList.contains("roll3-c2v")) { // cocas open vertical sequence -> horizontal
@@ -52,6 +70,79 @@ if (cocas) {
     });
     nav.addEventListener("click", (event) => {
         event.stopPropagation(); /* prevent body click event when clicking on cocas */
+    });
+
+    pastLink.addEventListener("click", () => {  // toggle hidden class to show page
+        event.stopPropagation();
+        pastPage.classList.remove("hidden");
+    });
+    pastPage.addEventListener("click", () => { // toggle hidden class to hide page when clicking on it
+        event.stopPropagation();
+        pastPage.classList.add("hidden");
+    });
+
+    languageLink.addEventListener("click", () => {
+        event.stopPropagation();
+        languagePage.classList.remove("hidden");
+    });
+    languagePage.addEventListener("click", () => {
+        event.stopPropagation();
+        languagePage.classList.add("hidden");
+    });
+
+    tasteLink.addEventListener("click", () => {
+        event.stopPropagation();
+        tastePage.classList.remove("hidden");
+    });
+    tastePage.addEventListener("click", () => {
+        event.stopPropagation();
+        tastePage.classList.add("hidden");
+    });
+
+    healthLink.addEventListener("click", () => {
+        event.stopPropagation();
+        healthPage.classList.remove("hidden");
+    });
+    healthPage.addEventListener("click", () => {
+        event.stopPropagation();
+        healthPage.classList.add("hidden");
+    });
+
+    futureLink.addEventListener("click", () => {
+        event.stopPropagation();
+        futurePage.classList.remove("hidden");
+    });
+    futurePage.addEventListener("click", () => {
+        event.stopPropagation();
+        futurePage.classList.add("hidden");
+    });
+
+    profileLink.addEventListener("click", () => {
+        event.stopPropagation();
+        profilePage.classList.remove("hidden");
+    });
+    profilePage.addEventListener("click", () => {
+        event.stopPropagation();
+        profilePage.classList.add("hidden");
+    });
+
+    nowLink.addEventListener("click", () => {
+        event.stopPropagation();
+        nowPage.classList.remove("hidden");
+    });
+    nowPage.addEventListener("click", () => {
+        event.stopPropagation();
+        nowPage.classList.add("hidden");
+    });
+
+    contactLink.addEventListener("click", () => {
+        event.stopPropagation();
+        contactPage.classList.remove("hidden");
+    }
+     );
+    contactPage.addEventListener("click", () => {
+        event.stopPropagation();
+        contactPage.classList.add("hidden");
     });
 }
 if (nav) {

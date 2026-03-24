@@ -11,6 +11,15 @@
 </head>
 
 <body class="preload">
+    <svg width="0" height="0">
+        <defs>
+            <clipPath id="puzzle-clip" clipPathUnits="objectBoundingBox">
+                <path d="M 0.2,0.2 C 0.2,0.1 0.3,0.1 0.4,0.2 C 0.4,0.1 0.6,0.1 0.6,0.2 C 0.7,0.1 0.8,0.1 0.8,0.2 L 0.8,0.4 C 0.9,0.4 0.9,0.6 0.8,0.6 L 0.8,0.8 C 0.8,0.9 0.7,0.9 0.6,0.8 C 0.6,0.9 0.4,0.9 0.4,0.8 C 0.3,0.9 0.2,0.9 0.2,0.8 L 0.2,0.6 C 0.1,0.6 0.1,0.4 0.2,0.4 Z"></path>
+            </clipPath>
+        </defs>
+    </svg>
+
+
     <img id="nav-cocas" src="assets/cocas-icon.png" alt="Navigation Cocas"></img>
     <div id="paper-cocas">
         <!-- <input> -->
@@ -18,13 +27,13 @@
 
         <div class="quadrant" id="q2">
             <div class="flap inner taste">
-                <a href="flaps/taste.html" class="flap-link">Taste</a>
+                <div id="taste" class="flap-link">Taste</div>
             </div>
             <div class="flap outer taste"> <!-- wrapper w/0 clip-path needed for 3d rotation of children-->
                 <div class="texture"></div>
             </div>
             <div class="flap inner health">
-                <a href="flaps/health.html" class="flap-link">Health</a>
+                <div id="health" class="flap-link">Health</div>
             </div>
             <div class="flap outer health">
                 <div class="texture"></div>
@@ -33,13 +42,13 @@
 
         <div class="quadrant" id="q1">
             <div class="flap inner past">
-                <a href="flaps/past.html" class="flap-link">Past</a>
+                <div id="past" class="flap-link">Past</div>
             </div>
             <div class="flap outer past">
                 <div class="texture"></div>
             </div>
             <div class="flap inner language">
-                <a href="flaps/language.html" class="flap-link">Language</a>
+                <div id="language" class="flap-link">Language</div>
             </div>
 
             <div class="flap outer language">
@@ -49,13 +58,13 @@
 
         <div class="quadrant" id="q3">
             <div class="flap inner future">
-                <a href="flaps/future.html" class="flap-link">Future</a>
+                <div id="future" class="flap-link">Future</div>
             </div>
             <div class="flap outer future">
                 <div class="texture"></div>
             </div>
             <div class="flap inner profile">
-                <a href="flaps/profile.html" class="flap-link">Profile</a>
+                <div id="profile" class="flap-link">Profile</div>
             </div>
             <div class="flap outer profile">
                 <div class="texture"></div>
@@ -64,13 +73,13 @@
 
         <div class="quadrant" id="q4">
             <div class="flap inner now">
-                <a href="flaps/now.html" class="flap-link">Now</a>
+                <div id="now" class="flap-link">Now</div>
             </div>
             <div class="flap outer now">
                 <div class="texture"></div>
             </div>
             <div class="flap inner contact">
-                <a href="flaps/contact.html" class="flap-link">Contact</a>
+                <div id="contact" class="flap-link">Contact</div>
             </div>
 
             <div class="flap outer contact">
@@ -80,32 +89,31 @@
 
     </div>
 
-    <section id="page-past" class="content hidden">
-        <h1>The Past</h1>
-    </section>
+    
     <section id="page-language" class="content hidden">
-        <h1>The Language</h1>
+        <h1>Language</h1>
+        <div id="piece-pt" class="puzzle-piece"></div>
     </section>
     <section id="page-taste" class="content hidden">
-        <h1>The Taste</h1>
+        <h1>Taste</h1>
     </section>
     <section id="page-health" class="content hidden">
-        <h1>The Health</h1>
+        <h1>Health</h1>
     </section>
     <section id="page-past" class="content hidden">
-        <h1>The Past</h1>
+        <h1>Past</h1>
     </section>
     <section id="page-future" class="content hidden">
-        <h1>The Future</h1>
+        <h1>Future</h1>
     </section>
     <section id="page-profile" class="content hidden">
-        <h1>The Profile</h1>
+        <h1>Profile</h1>
     </section>
     <section id="page-now" class="content hidden">
-        <h1>The Now</h1>
+        <h1>Now</h1>
     </section>
     <section id="page-contact" class="content hidden">
-        <h1>The Contact</h1>
+        <h1>Contact</h1>
     </section>
 
 </body>
